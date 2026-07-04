@@ -18,3 +18,5 @@ then it'll serve at `https://<you>.github.io/<repo>/`.
 * I'm still very interested in exploring more, but unfortunately my initial experience led me to believe that this model Consumption is not fit for anyone using a max plan, even the 20x version with usage credits enabled. 
 * Is it right for me? I still don't know, but my take is that there are some technical kinks that need to be fixed, some governance within how it takes off and decides to consume tokens, as well as some better marketing around how it should be used. 
 * My honest first impression on Fable... it feels like I have the ability to complete a four year PhD research project within one prompt while consuming billions of tokens. That's still an optimistic opinion. The internal errors I encountered with Fable were far too frequent.  
+
+## Hopefully, we can get more access to this model so we can all explore it in a cost-effective manner. 
