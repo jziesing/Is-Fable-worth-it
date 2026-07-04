@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is Fable 5 worth it? — a first-hand Max 20x analysis</title>
+<meta name="description" content="On-device analysis of Fable 5 vs Opus 4.8 vs Sonnet 5 from a Max 20x subscriber.">
+<style>html,body{margin:0;padding:0;background:#0D1121}</style>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#0D1121; --ground2:#101429; --panel:#191E3C; --panel2:#20264A; --panelHi:#272E56;
+    --ink:#EDECF7; --ink2:#C9C5E6; --muted:#9A96C0; --faint:#6E6B96;
+    --accent:#8F7BDB; --accentBright:#A99CEC; --lavender:#A9A0DF; --gold:#E6B367;
+    --good:#67BD82; --warn:#E6B367; --critical:#D88386; --claude:#D97757;
+    --line:rgba(169,160,223,.14); --glass:rgba(25,30,60,.72);
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  .wrap{font-family:var(--sans);color:var(--ink);
+    background:radial-gradient(1100px 600px at 82% -10%,rgba(143,123,219,.16),transparent 60%),
+      radial-gradient(900px 520px at 5% 108%,rgba(230,179,103,.06),transparent 62%),
+      linear-gradient(180deg,var(--ground),var(--ground2));
+    min-height:100vh;padding:36px clamp(16px,5vw,48px) 64px;-webkit-font-smoothing:antialiased;
+    font-variant-numeric:tabular-nums;}
+  .shell{max-width:1120px;margin:0 auto}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  h1{font-size:clamp(30px,5vw,48px);font-weight:800;letter-spacing:-.02em;margin:8px 0 6px;text-wrap:balance}
+  .lede{color:var(--ink2);font-size:clamp(15px,2vw,18px);line-height:1.55;max-width:72ch}
+  .lede b{color:var(--ink)}
+  .disc{margin:20px 0 0;padding:14px 16px;border-left:3px solid var(--gold);
+    background:rgba(230,179,103,.07);border-radius:0 10px 10px 0;font-size:13.5px;color:var(--ink2);line-height:1.55;max-width:82ch}
+  .disc b{color:var(--gold)}
+  .getapp{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 4px}
+  .btn{display:inline-flex;flex-direction:column;gap:2px;text-decoration:none;border-radius:12px;padding:11px 16px;
+    border:1px solid var(--line);background:var(--panel);transition:.12s}
+  .btn:hover{border-color:var(--accentBright);background:var(--panel2)}
+  .btn .t{font-size:14px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px}
+  .btn .s{font-size:11.5px;color:var(--muted)}
+  .btn.live .t::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--good)}
+  .btn.soon{opacity:.72;cursor:default}
+  .btn.soon .t::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold)}
+  .toolbar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:30px 0 4px}
+  .tlabel{font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+  .group{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px}
+  .mbtn{appearance:none;border:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;
+    color:var(--ink2);background:transparent;border-radius:9px;padding:8px 16px;display:inline-flex;gap:8px;align-items:center;transition:.12s}
+  .mbtn .dot{width:9px;height:9px;border-radius:50%;background:currentColor;opacity:.55}
+  .mbtn:hover{color:var(--ink)}
+  .mbtn.on.fable{background:var(--critical);color:#0D1121} .mbtn.on.opus{background:var(--good);color:#0D1121}
+  .mbtn.on.sonnet{background:var(--accentBright);color:#0D1121}
+  .mbtn.on .dot{opacity:1;background:#0D1121}
+  .hint{font-size:12.5px;color:var(--faint)}
+  .cols{display:grid;gap:16px;margin-top:20px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+  .card{background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:22px;backdrop-filter:blur(12px);
+    box-shadow:0 10px 30px rgba(0,0,0,.28)}
+  .card.fable{border-color:rgba(216,131,134,.4)} .card.opus{border-color:rgba(103,189,130,.36)} .card.sonnet{border-color:rgba(169,156,236,.34)}
+  .vlab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+  .mhead{display:flex;align-items:center;gap:9px;margin:8px 0 2px}
+  .mhead .d{width:12px;height:12px;border-radius:50%}
+  .mname{font-size:21px;font-weight:700}
+  .fit{font-size:13.5px;font-weight:700;margin:1px 0}
+  .fit.fable{color:var(--critical)} .fit.opus{color:var(--good)} .fit.sonnet{color:var(--accentBright)}
+  .win{font-size:11.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+  .big{display:flex;align-items:baseline;gap:8px;margin-bottom:2px}
+  .big .n{font-size:34px;font-weight:800;letter-spacing:-.02em}
+  .big .u{font-size:13px;color:var(--muted)}
+  .statgrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);
+    border-radius:11px;overflow:hidden;margin:16px 0}
+  .st{background:var(--panel);padding:10px 13px}
+  .st .k{font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .st .v{font-size:16px;font-weight:700;margin-top:3px}
+  .st .v.bad{color:var(--critical)} .st .v.good{color:var(--good)} .st .v.warn{color:var(--warn)}
+  .seclab{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accentBright);font-weight:700;margin:16px 0 7px}
+  .bar{height:22px;border-radius:7px;overflow:hidden;display:flex;border:1px solid var(--line)}
+  .seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#0D1121;white-space:nowrap;overflow:hidden}
+  .seg.deliver{background:var(--good)} .seg.explore{background:var(--lavender)} .seg.analysis{background:var(--accent);color:#EDECF7}
+  .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:9px;font-size:11.5px;color:var(--ink2)}
+  .legend span{display:inline-flex;gap:5px;align-items:center}
+  .sw{width:10px;height:10px;border-radius:3px}
+  .ll{width:16px;height:0;border-top:2px solid;display:inline-block}
+  canvas{width:100%;height:auto;display:block;margin-top:4px}
+  .cnote{font-size:12px;color:var(--muted);line-height:1.5;margin-top:8px}
+  .cnote b{color:var(--ink2)}
+  .take{margin-top:16px;font-size:13.5px;line-height:1.55;color:var(--ink);opacity:.92;padding-top:14px;border-top:1px solid var(--line)}
+  .take b{color:var(--gold)}
+  .fits{margin-top:48px}
+  .fits h2{font-size:22px;font-weight:700;margin-bottom:14px}
+  .fitrow{display:grid;grid-template-columns:auto 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--line);align-items:start}
+  .chip{font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px;white-space:nowrap}
+  .chip.fable{background:rgba(216,131,134,.15);color:var(--critical)}
+  .chip.opus{background:rgba(103,189,130,.15);color:var(--good)}
+  .chip.sonnet{background:rgba(169,156,236,.15);color:var(--accentBright)}
+  .fitrow p{margin:0;font-size:14px;line-height:1.55;color:var(--ink2)}
+  .fitrow p b{color:var(--ink)}
+  .method{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);line-height:1.6}
+  .method b{color:var(--ink2)} .method code{color:var(--accentBright);font-family:ui-monospace,monospace;font-size:12px}
+  .foot{margin-top:22px;font-size:11.5px;color:var(--faint);line-height:1.6}
+  @media(max-width:640px){.statgrid{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap"><div class="shell">
+  <div class="eyebrow">A first-hand analysis · Anthropic Max&nbsp;20× subscriber</div>
+  <h1>Is Fable&nbsp;5 worth it?</h1>
+  <p class="lede">Anthropic shipped a new model billed as its <b>most capable</b>. I tried it for a couple of days
+    and reconstructed exactly what it did — from my own local Claude&nbsp;Code logs — next to <b>Opus&nbsp;4.8</b>
+    (my daily driver) and <b>Sonnet&nbsp;5</b>. Each snapshot is the <b>same 5-hour window length</b> for every
+    model (different dates — I usually run several Opus sessions at once, so an identical clock window isn't
+    possible). The takeaway matches a very common first-week experience.</p>
+
+  <div class="disc"><b>Read this honestly.</b> The figures are <b>mostly precise</b> — computed from my actual
+    on-device Claude&nbsp;Code JSONL (token counts are exact; dollars are public list-price estimates). A few values
+    are <b>illustrative</b> where I lacked full data (marked <b>*</b>): Opus rarely hit the same overage wall, and
+    <b>Sonnet&nbsp;5's card is illustrative</b> — plausible numbers for how it fits, since I use Sonnet lightly. The
+    general outcome represents my experience as a <b>Max&nbsp;20× subscriber with $400+ of usage credits</b> — not a
+    benchmark, but a real bill.</div>
+
+  <div class="getapp">
+    <a class="btn live" href="https://apps.apple.com/us/app/ai-agent-usage/id6770159263?mt=12" target="_blank" rel="noopener">
+      <span class="t">AI Agent Usage — Free on the App Store</span><span class="s">older build</span></a>
+    <a class="btn soon" href="https://github.com/jziesing/ai-agent-usage-downloads/releases/tag/v1.3.1" onclick="return false">
+      <span class="t">AI Agent Usage — Signed DMG</span><span class="s">latest build w/ model value and usage burn · link coming soon</span></a>
+  </div>
+
+  <div class="toolbar">
+    <span class="tlabel">Show / compare</span>
+    <div class="group" id="group">
+      <button class="mbtn fable on" data-m="fable"><span class="dot"></span>Fable&nbsp;5</button>
+      <button class="mbtn opus on" data-m="opus"><span class="dot"></span>Opus&nbsp;4.8</button>
+      <button class="mbtn sonnet on" data-m="sonnet"><span class="dot"></span>Sonnet&nbsp;5</button>
+    </div>
+    <span class="hint">Click to add or remove a model — 1 = single view, 2–3 = side-by-side compare.</span>
+  </div>
+
+  <div class="cols" id="cols"></div>
+
+  <div class="fits">
+    <h2>When each model fit best</h2>
+    <div class="fitrow"><span class="chip opus">Opus&nbsp;4.8 · build</span>
+      <p><b>The workhorse.</b> Costs the most in absolute dollars, but the spend turns into shipped code — 784 edits
+        across 117 files in one 5-hour window, only a third of it sub-agents. When I need features and fixes, this
+        is what delivers.</p></div>
+    <div class="fitrow"><span class="chip sonnet">Sonnet&nbsp;5 · efficient</span>
+      <p><b>The efficient middleweight.</b> For well-scoped, routine work it ships at a fraction of Opus's cost and
+        never comes near the plan ceiling. The value pick when the task is clearly defined. <i>(Illustrative.)</i></p></div>
+    <div class="fitrow"><span class="chip fable">Fable&nbsp;5 · caution</span>
+      <p><b>The credit furnace.</b> 90% of its work was a sub-agent fleet reading and reasoning (88% explore, 5%
+        deliver). It maxed the 5-hour session limit and spilled ~$400 into usage credits — for 166 edits. Most
+        capable at consuming credits, not at shipping what I asked for.</p></div>
+  </div>
+
+  <div class="method">
+    <b>Method.</b> Reconstructed on-device from my Claude&nbsp;Code transcripts (<code>~/.claude/projects/**/*.jsonl</code>).
+    Each card is that model's <b>heaviest single 5-hour window</b> in my history. "Requests" = billed model calls
+    (sub-agents included — the unit a subscription's 5-hour limit is actually metered in, not tokens). The
+    <b>Plan Burn</b> chart plots requests-in-the-last-5h vs my plan's inferred ~6,500-request ceiling; anything
+    above it bills to overage credits. "Explore / deliver / analysis" buckets tool calls (Read·Bash·search vs
+    Edit·Write vs plans·reports·sub-agent spawns). Dollars are public list-price × my tokens — Anthropic doesn't
+    publish per-user billing, so these are estimates, not my invoice. <b>*</b> Illustrative where noted.
+  </div>
+  <div class="foot">Built with the on-device "AI Agent Usage" analysis app · real figures from 2026-06-16 →
+    2026-07-02 · shared for teams weighing model access and for GTM/revenue folks curious about the first-week
+    reaction.</div>
+</div></div>
+
+<script>
+(function(){
+  const FAB=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,21,3623,3991,4511,5168,5512,2882,5172,4700,4043,3678,2706,48,0,0,0,0,0,0,0];
+  const OPU=[0,0,0,0,0,0,0,8,432,627,952,2554,3519,3645,4180,4055,2655,1682,1132,402,202,0,0,262,1161,2685,3092,4082,4873,4266,3542,3683,3562,2952,2742,2015,1575,1591,2004,1922,1849,1741,856,0,0,0,0,6,160,745,745,745,739,605,72,72,219,1486,3209,4435,5829,5942,4691,2950,1678,298,149,329,327,321,307,196,0];
+  const SON=[0,0,0,0,0,0,120,420,760,1180,1520,1720,1500,1050,560,180,0,0,0,0,0,0,240,620,980,1240,1120,760,360,120,0,0,0,0,0,0,300,700,1150,1620,1840,1660,1180,640,240,0,0,0,0,0,0,0,180,520,900,1280,1450,1300,880,420,120,0,0,0,0,0,0,0,0,0,0,0]; // illustrative
+  const CEIL=6500;
+  const MODELS = {
+    fable:{cls:"fable",name:"Claude Fable 5",dot:"#D97757",line:"#E6B367",fit:"Burned credits, shipped little",
+      win:"5-hour snapshot · Jul 2, 2026", cost:"$1,439", costU:"list-price est · this window",
+      stats:[["Peak burn","$829/hr","bad"],["From sub-agents","90%","bad"],["Explore : deliver","18 : 1","warn"],
+        ["Forced overage","≈ $400","bad"],["Sessions · prompts","3 · ~65",""],["Requests · edits","5,533 · 166","warn"]],
+      comp:{deliver:5,explore:88,analysis:7}, content:"12.6M", cache:"524.6M", fresh:2, series:FAB,
+      cnote:"Idle for two days, then <b>one workflow spiked Fable to 5,512 requests</b> in a single 5-hour window — alone, ~85% of my whole plan's 5-hour budget.",
+      take:"90% of its spend was a <b>sub-agent fleet</b> — 88% explore, 5% deliver. It maxed the 5-hour limit and bled ~$400 into usage credits, for 166 edits across 38 files. The most capable model at consuming credits."},
+    opus:{cls:"opus",name:"Claude Opus 4.8",dot:"#67BD82",line:"#67BD82",fit:"The workhorse — it shipped",
+      win:"5-hour snapshot · Jun 16, 2026", cost:"$4,009", costU:"list-price est · this window",
+      stats:[["Peak burn","$1,432/hr","warn"],["From sub-agents","33%",""],["Explore : deliver","2.4 : 1","good"],
+        ["Forced overage","Absorbed *",""],["Sessions · prompts","7 · ~177",""],["Requests · edits","6,089 · 784","good"]],
+      comp:{deliver:26,explore:63,analysis:11}, content:"11.8M", cache:"1.73B", fresh:1, series:OPU,
+      cnote:"The <b>daily-driver</b> pattern — sustained, repeated peaks near the ceiling across two days, but the spend converted to 784 edits.",
+      take:"Costs more in absolute terms, but <b>26% of its effort was delivery</b> — 784 edits across 117 files — and only a third was sub-agents. The spend turned into shipped work."},
+    sonnet:{cls:"sonnet",name:"Claude Sonnet 5",dot:"#A9A0DF",line:"#A99CEC",fit:"The efficient middleweight *",
+      win:"5-hour snapshot · illustrative *", cost:"$210", costU:"illustrative estimate",
+      stats:[["Peak burn","$95/hr","good"],["From sub-agents","22%","good"],["Explore : deliver","1.3 : 1","good"],
+        ["Forced overage","$0","good"],["Sessions · prompts","5 · ~120",""],["Requests · edits","1,850 · 410","good"]],
+      comp:{deliver:45,explore:40,analysis:15}, content:"8.0M", cache:"180M", fresh:4, series:SON,
+      cnote:"Comfortably <b>under the ceiling all window</b> — you'd have to try hard to hit an overage with Sonnet on well-scoped work. <i>(Illustrative.)</i>",
+      take:"When the task is well-scoped, Sonnet 5 ships at a fraction of Opus's cost — ~<b>410 edits for ~$210</b>, nearly half its effort going to delivery, and never near the plan ceiling. My value pick for routine, well-defined work. <i>(Illustrative — I use Sonnet lightly.)</i>"}
+  };
+  const order=["fable","opus","sonnet"];
+  const sel=new Set(["fable","opus","sonnet"]);
+  const cols=document.getElementById("cols");
+  function seg(k,v){ if(v<=0) return ""; return '<div class="seg '+k+'" style="flex:'+v+'">'+(v>=10?v+"%":"")+'</div>'; }
+  function card(id){
+    const m=MODELS[id];
+    let stats=m.stats.map(s=>'<div class="st"><div class="k">'+s[0]+'</div><div class="v '+(s[2]||"")+'">'+s[1]+'</div></div>').join("");
+    let legend='<span><i class="sw" style="background:var(--good)"></i>Deliver '+m.comp.deliver+'%</span>'
+      +'<span><i class="sw" style="background:var(--lavender)"></i>Explore '+m.comp.explore+'%</span>'
+      +'<span><i class="sw" style="background:var(--accent)"></i>Analysis '+m.comp.analysis+'%</span>';
+    return '<div class="card '+m.cls+'">'
+      +'<div class="vlab">The verdict</div>'
+      +'<div class="mhead"><span class="d" style="background:'+m.dot+'"></span><span class="mname">'+m.name+'</span></div>'
+      +'<div class="fit '+m.cls+'">'+m.fit+'</div><div class="win">'+m.win+'</div>'
+      +'<div class="big"><span class="n">'+m.cost+'</span><span class="u">'+m.costU+'</span></div>'
+      +'<div class="statgrid">'+stats+'</div>'
+      +'<div class="seclab">Plan burn — requests per rolling 5 hours</div>'
+      +'<canvas data-m="'+id+'" width="540" height="150"></canvas>'
+      +'<div class="legend" style="margin-top:6px"><span><i class="ll" style="border-color:'+m.line+'"></i>Requests in last 5h</span>'
+      +'<span><i class="ll" style="border-color:var(--critical);border-top-style:dashed"></i>Plan ceiling (~6,500)</span>'
+      +'<span><i class="sw" style="background:rgba(216,131,134,.32)"></i>Overage</span></div>'
+      +'<div class="cnote">'+m.cnote+'</div>'
+      +'<div class="seclab">How the effort split</div>'
+      +'<div class="bar">'+seg("deliver",m.comp.deliver)+seg("explore",m.comp.explore)+seg("analysis",m.comp.analysis)+'</div>'
+      +'<div class="legend">'+legend+'</div>'
+      +'<div class="seclab" style="margin-top:14px">Where the tokens went</div>'
+      +'<div class="legend"><span><i class="sw" style="background:var(--good)"></i>Fresh '+m.content+'</span>'
+      +'<span><i class="sw" style="background:var(--panelHi)"></i>Cache '+m.cache+' ('+(100-m.fresh)+'% re-reads)</span></div>'
+      +'<div class="take">'+m.take+'</div></div>';
+  }
+  function drawChart(cv){
+    const m=MODELS[cv.dataset.m], data=m.series;
+    // High-DPI: size the backing store to the display's pixel ratio so lines are crisp.
+    const cssW=cv.clientWidth||540, cssH=Math.round(cssW*150/540), dpr=Math.min(window.devicePixelRatio||1,3);
+    cv.width=Math.round(cssW*dpr); cv.height=Math.round(cssH*dpr); cv.style.height=cssH+'px';
+    const ctx=cv.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0);
+    const W=cssW,H=cssH,padL=42,padR=10,padT=12,padB=20,iw=W-padL-padR,ih=H-padT-padB;
+    const max=Math.max(CEIL*1.08, Math.max.apply(null,data)*1.05);
+    const x=i=>padL+(i/(data.length-1))*iw, y=v=>padT+ih-(v/max)*ih;
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle='rgba(169,160,223,.10)';ctx.fillStyle='#6E6B96';ctx.font='10px -apple-system,system-ui,sans-serif';ctx.lineWidth=1;
+    [0,CEIL].forEach(v=>{var yy=y(v);ctx.beginPath();ctx.moveTo(padL,yy);ctx.lineTo(W-padR,yy);ctx.stroke();ctx.fillText(v===0?'0':(v/1000).toFixed(1).replace(/\.0$/,'')+'k',6,yy+3);});
+    // overage shading above ceiling
+    var og=ctx.createLinearGradient(0,padT,0,y(CEIL));og.addColorStop(0,'rgba(216,131,134,.30)');og.addColorStop(1,'rgba(216,131,134,.05)');
+    ctx.fillStyle=og;ctx.fillRect(padL,padT,iw,y(CEIL)-padT);
+    // area
+    var ga=ctx.createLinearGradient(0,padT,0,padT+ih);ga.addColorStop(0,hex(m.line,.28));ga.addColorStop(1,hex(m.line,.02));
+    ctx.beginPath();ctx.moveTo(x(0),y(0));data.forEach((v,i)=>ctx.lineTo(x(i),y(v)));ctx.lineTo(x(data.length-1),y(0));ctx.closePath();ctx.fillStyle=ga;ctx.fill();
+    // line
+    ctx.strokeStyle=m.line;ctx.lineWidth=2;ctx.lineJoin='round';ctx.beginPath();data.forEach((v,i)=>i?ctx.lineTo(x(i),y(v)):ctx.moveTo(x(i),y(v)));ctx.stroke();
+    // ceiling dashed
+    ctx.setLineDash([5,4]);ctx.strokeStyle='rgba(216,131,134,.85)';ctx.beginPath();ctx.moveTo(padL,y(CEIL));ctx.lineTo(W-padR,y(CEIL));ctx.stroke();ctx.setLineDash([]);
+    // peak dot
+    var pi=data.indexOf(Math.max.apply(null,data));
+    ctx.beginPath();ctx.arc(x(pi),y(data[pi]),3.5,0,7);ctx.fillStyle=m.line;ctx.fill();ctx.strokeStyle='#0D1121';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle='#EDECF7';ctx.font='700 11px -apple-system,system-ui,sans-serif';ctx.textAlign='center';
+    ctx.fillText(data[pi].toLocaleString(),x(pi),y(data[pi])-8);ctx.textAlign='left';
+  }
+  function hex(h,a){var n=parseInt(h.slice(1),16);return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')';}
+  function render(){
+    cols.innerHTML = order.filter(id=>sel.has(id)).map(card).join("") || '';
+    document.querySelectorAll(".mbtn").forEach(b=>b.classList.toggle("on", sel.has(b.dataset.m)));
+    document.querySelectorAll("canvas[data-m]").forEach(drawChart);
+  }
+  document.getElementById("group").addEventListener("click",e=>{
+    const b=e.target.closest(".mbtn"); if(!b) return;
+    const id=b.dataset.m;
+    if(sel.has(id)){ if(sel.size>1) sel.delete(id); } else sel.add(id);
+    render();
+  });
+  render();
+  // Redraw charts crisply when the layout width changes.
+  let rt; window.addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(render,150);});
+})();
+</script>
+
+</body>
+</html>
